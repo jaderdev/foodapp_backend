@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_15_183320) do
+ActiveRecord::Schema.define(version: 2019_07_19_175734) do
 
   create_table "historicos", force: :cascade do |t|
     t.integer "pedido_id"
     t.text "descricao"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
     t.index ["pedido_id"], name: "index_historicos_on_pedido_id"
   end
 
