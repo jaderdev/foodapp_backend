@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_19_175734) do
+ActiveRecord::Schema.define(version: 2019_07_24_190450) do
 
   create_table "historicos", force: :cascade do |t|
     t.integer "pedido_id"
@@ -26,8 +26,10 @@ ActiveRecord::Schema.define(version: 2019_07_19_175734) do
     t.text "descricao"
     t.integer "tempo_preparo"
     t.text "ingredientes"
+    t.integer "restaurante_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["restaurante_id"], name: "index_items_on_restaurante_id"
   end
 
   create_table "pedidos", force: :cascade do |t|
@@ -48,6 +50,17 @@ ActiveRecord::Schema.define(version: 2019_07_19_175734) do
     t.date "hora_fechamento"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username", null: false
+    t.string "email", null: false
+    t.string "password_digest"
+    t.string "role", default: "user", null: false
+    t.datetime "last_login"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email"
   end
 
 end

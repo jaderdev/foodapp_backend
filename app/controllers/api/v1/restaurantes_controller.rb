@@ -1,7 +1,8 @@
 class Api::V1::RestaurantesController < ApplicationController
+	before_action :authenticate_user,  only: [:index]
 	def index 
 		restaurantes = Restaurante.order('created_at DESC');
-		render json: {status: 'SUCCESS', message:'Itens carregados', data:restaurantes},status: :ok
+		render json: {status: 'SUCCESS', message:'Restaurantes carregados', data:restaurantes},status: :ok
 	end
 
 	def show
@@ -9,7 +10,7 @@ class Api::V1::RestaurantesController < ApplicationController
 		render json: {status: 'SUCCESS', message:'Loaded restaurantes', data:restaurante},status: :ok
 	end
 
-	# Criar um novo artigo
+	# Criar um novo restaurante
 	def create
 		restaurante = Restaurante.new(restaurante_params)
 		if restaurante.save
@@ -18,14 +19,14 @@ class Api::V1::RestaurantesController < ApplicationController
 			render json: {status: 'ERROR', message:'restaurantes not saved', data: restaurante.errors},status: :precondition_failed
 		end
 	end
-	# Excluir artigo
+	# Excluir restaurante
 	def destroy
 		restaurante = Restaurante.find(params[:id])
 		restaurante.destroy
 		render json: {status: 'SUCCESS', message:'Deleted restaurante', data:restaurante},status: :ok
 	end
  
-	# Atualizar um artigo
+	# Atualizar um restaurante
 	def update
 		restaurante = Restaurante.find(params[:id])
 		if restaurante.update_attributes(restaurante_params)

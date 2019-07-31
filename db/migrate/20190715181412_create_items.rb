@@ -5,7 +5,7 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.text :descricao
       t.integer :tempo_preparo
       t.text :ingredientes
-
+      t.references :restaurante, foreign_key: true
       t.timestamps
     end
   end
