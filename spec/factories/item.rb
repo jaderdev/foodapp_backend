@@ -4,5 +4,6 @@ FactoryBot.define do
     nome {Faker::Food.ingredient}
     descricao {Faker::Lorem.sentence} 
     ingredientes {Faker::Lorem.sentence}
+    restaurante { create(:restaurante)}
   end
 end
